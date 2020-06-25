@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>NDP 2020</title>
+        <script src="JS/main.js"></script>
+        <link rel="stylesheet" type="text/css" href="CSS/main.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    </head>
+
+    <body class="screen">
+        <div class="mainPageContainer">
+            <h1 style="color: #553D67" align="center">CONTENT COMMITTEE CHECKLIST <i class="fa fa-check-square-o" aria-hidden="true"></i></h1>
+            <p class="bold">Congratulations, on finishing your edit!</p>
+            <p class="regular">Now it's time to render, before your do please make sure you've done the following:</p>
+            <br>
+            <div id="page1">
+                <p class="bold">I'm Creating Content For:</p>
+                <select onchange="checkWhichSelection();" id="selectCompany" class="selectCompany">
+                    <option value="NIL">
+                        Please pick an option
+                    </option>
+                    <option value="showCompany">
+                        Show Company (For the LED Screens (K1-5, F1-2))
+                    </option>
+                    <option value="hexagon">
+                        Hexagon (For the projection panel)
+                    </option>
+                </select>
+                <br><br>
+                <div id="showCompany" style="display: none;">
+                    <p class="bold">Checklist <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                    <ul id="showCompanyCheck" class="parent1">
+                        <li>File Format: .mov</li>
+                        <li>codex: dxv2</li>
+                    </ul>
+                    <br><br>
+                </div>
+
+                <div id="hexagon" style="display: none;">
+                    <p class="bold">Checklist <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                    <ul id="hexagonCheck" class="parent2">
+                        <li>File Format: .mov</li>
+                        <li>codex: hap</li>
+                    </ul>
+                    <br><br>
+                </div>
+                <button onclick="nextPage();" style="display: none" id="formButton" class="formButton">NEXT</button>
+            </div>
+            <div id="page2" style="display: none;">
+                <p class="bold">CONFIGURE FILE NAME</p>
+                <p class="light" style="margin: 0;">File Name:</p>
+                <input onchange="generateCopyText();" class="inputFocus" id="filename" >
+                <div style="text-align: center;">
+                    <a class="link" href="javascript:copyTextFunc();"><label style="cursor: pointer" id="copyText" class="light">Start Typing...</label> &nbsp;<i class="fa fa-clipboard" aria-hidden="true"></i></a>
+                    <em><p class="light" id="copied">&nbsp;</p></em>
+                </div>
+                <br><br><br><br>
+                <button onclick="refresh();" class="formButton">New Render</button>
+                <input id="copy" style="display: none;">
+            </div>
+        </div>
+    </body>
+
+    <script>
+        function checkWhichSelection(){
+
+        	if( $('#selectCompany').val() === 'showCompany' ){
+        		$('#showCompany').fadeIn();
+		        $('#hexagon').hide();
+		        $('#formButton').show();
+            }
+	        else if( $('#selectCompany').val() === 'hexagon' ){
+		        $('#hexagon').fadeIn();
+		        $('#showCompany').hide();
+		        $('#formButton').show();
+	        }
+	        else{
+		        $('#showCompany').hide();
+		        $('#hexagon').hide();
+		        $('#formButton').hide();
+            }
+
+        }
+        function nextPage(){
+	        let parent1 = document.querySelector(".parent1"),
+		        parent2 = document.querySelector(".parent2");
+        	if($('#selectCompany').val() === 'showCompany'){
+		        if (parent1.children.length == parent1.querySelectorAll(".checked").length) {
+			        $('#page1').hide();
+			        $('#page2').fadeIn();
+		        }
+		        else{
+			        Swal.fire({
+				        icon: 'error',
+				        title: 'Oops...',
+				        text: 'Please make sure you\'ve configured the files properly',
+			        })
+                }
+            }
+	        if($('#selectCompany').val() === 'hexagon'){
+		        if (parent1.children.length == parent2.querySelectorAll(".checked").length) {
+			        $('#page1').hide();
+			        $('#page2').fadeIn();
+		        }
+		        else{
+			        Swal.fire({
+				        icon: 'error',
+				        title: 'Oops...',
+				        text: 'Please make sure you\'ve configured the files properly',
+			        })
+		        }
+	        }
+        }
+        function refresh(){
+	        location.reload();
+        }
+        function generateCopyText(){
+        	$("#copyText").html($('#filename').val().toUpperCase()+'_v'+moment(new Date()).format('YYYYMMDDHHmm')+'.mov')
+        }
+        function copyTextFunc() {
+        	$('#copy').show();
+        	$('#copy').val($('#copyText').html())
+	        var copyText = document.getElementById("copy");
+	        copyText.select();
+	        copyText.setSelectionRange(0, 99999)
+	        document.execCommand("copy");
+	        $('#copied').fadeIn();
+	        $('#copied').html('Copied!<i class="fa fa-check" aria-hidden="true"></i></p>')
+	        $('#copy').hide();
+        }
+
+	    // Add a "checked" symbol when clicking on a list item
+	    var list1 = document.getElementById('showCompanyCheck');
+	    list1.addEventListener('click', function(ev) {
+		    if (ev.target.tagName === 'LI') {
+			    ev.target.classList.toggle('checked');
+		    }
+	    }, false);
+
+        var list2 = document.getElementById('hexagonCheck');
+        list2.addEventListener('click', function(ev) {
+	        if (ev.target.tagName === 'LI') {
+		        ev.target.classList.toggle('checked');
+	        }
+        }, false);
+
+
+    </script>
+</html>
