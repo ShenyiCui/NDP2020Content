@@ -20,7 +20,7 @@
             <br>
             <div id="page1">
                 <p class="bold">I'm Creating Content For:</p>
-                <select onchange="checkWhichSelection();" id="selectCompany" class="selectCompany">
+                <select onchange="checkWhichSelection();" id="selectCompany" class="selectForm">
                     <option value="NIL">
                         Please pick an option
                     </option>
@@ -36,16 +36,19 @@
                     <p class="bold">Checklist <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
                     <ul id="showCompanyCheck" class="parent1">
                         <li>File Format: .mov</li>
-                        <li>codex: dxv2</li>
+                        <li>codec: dxv2</li>
+                        <li>FPS: 25</li>
+                        <li>Your resolution is correct (double check your instructions)</li>
                     </ul>
                     <br><br>
                 </div>
-
                 <div id="hexagon" style="display: none;">
                     <p class="bold">Checklist <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
                     <ul id="hexagonCheck" class="parent2">
                         <li>File Format: .mov</li>
-                        <li>codex: hap</li>
+                        <li>codec: hap</li>
+                        <li>FPS: 25</li>
+                        <li>Your resolution is correct (double check your instructions)</li>
                     </ul>
                     <br><br>
                 </div>
@@ -53,11 +56,24 @@
             </div>
             <div id="page2" style="display: none;">
                 <p class="bold">CONFIGURE FILE NAME</p>
-                <p class="light" style="margin: 0;">File Name:</p>
-                <input onchange="generateCopyText();" class="inputFocus" id="filename" >
-                <div style="text-align: center;">
-                    <a class="link" href="javascript:copyTextFunc();"><label style="cursor: pointer" id="copyText" class="light">Start Typing...</label> &nbsp;<i class="fa fa-clipboard" aria-hidden="true"></i></a>
-                    <em><p class="light" id="copied">&nbsp;</p></em>
+                <p class="light" style="margin: 0">Choose Load-In Time</p>
+                 <select onchange="checkLoadInSelection()" id="selectLoadIn" class="selectForm">
+                     <option value="NIL">Choose an option</option>
+                     <option value="Auto">Automatically Choose The Nearest Load-In Time</option>
+                     <option value="1000">1000</option>
+                     <option value="1200">1200</option>
+                     <option value="1500">1500</option>
+                     <option value="1700">1700</option>
+                     <option value="1900">1900</option>
+                 </select>
+                 <br><br>
+                <div id="filenameChooser" style="display: block;">
+                    <p class="light" style="margin: 0;">File Name:</p>
+                    <input onchange="generateCopyText();" class="inputFocus" id="filename" >
+                    <div style="text-align: center;">
+                        <a class="link" href="javascript:copyTextFunc();"><label style="cursor: pointer" id="copyText" class="light">Start Typing...</label> &nbsp;<i class="fa fa-clipboard" aria-hidden="true"></i></a>
+                        <em><p class="light" id="copied">&nbsp;</p></em>
+                    </div>
                 </div>
                 <br><br><br><br>
                 <button onclick="refresh();" class="formButton">New Render</button>
@@ -86,6 +102,11 @@
             }
 
         }
+        function checkLoadInSelection(){
+	        if( $('#selectLoadIn').val() !== 'NIL' ){
+		        $('#filenameChooser').show();
+	        }
+        }
         function nextPage(){
 	        let parent1 = document.querySelector(".parent1"),
 		        parent2 = document.querySelector(".parent2");
@@ -103,7 +124,7 @@
                 }
             }
 	        if($('#selectCompany').val() === 'hexagon'){
-		        if (parent1.children.length == parent2.querySelectorAll(".checked").length) {
+		        if (parent2.children.length == parent2.querySelectorAll(".checked").length) {
 			        $('#page1').hide();
 			        $('#page2').fadeIn();
 		        }
@@ -129,6 +150,7 @@
 	        copyText.select();
 	        copyText.setSelectionRange(0, 99999)
 	        document.execCommand("copy");
+	        $('#copied').hide();
 	        $('#copied').fadeIn();
 	        $('#copied').html('Copied!<i class="fa fa-check" aria-hidden="true"></i></p>')
 	        $('#copy').hide();
