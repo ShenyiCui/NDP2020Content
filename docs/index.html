@@ -38,7 +38,7 @@
                         <li>File Format: .mov</li>
                         <li>codec: dxv2</li>
                         <li>FPS: 25</li>
-                        <li>Your resolution is correct (double check your instructions)</li>
+                        <li>Your resolution is correct (Double check it matches your respective screen)</li>
                     </ul>
                     <br><br>
                 </div>
@@ -55,9 +55,10 @@
                 <button onclick="nextPage();" style="display: none" id="formButton" class="formButton">NEXT</button>
             </div>
             <div id="page2" style="display: none;">
+
                 <p class="bold">CONFIGURE FILE NAME</p>
                 <p class="light" style="margin: 0">Choose Load-In Time</p>
-                 <select onchange="checkLoadInSelection()" id="selectLoadIn" class="selectForm">
+                <select onchange="checkLoadInSelection()" id="selectLoadIn" class="selectForm">
                      <option value="NIL">Choose an option</option>
                      <option value="Auto">Automatically Choose The Nearest Load-In Time</option>
                      <option value="1000">1000</option>
@@ -66,16 +67,84 @@
                      <option value="1700">1700</option>
                      <option value="1900">1900</option>
                  </select>
-                 <br><br>
-                <div id="filenameChooser" style="display: block;">
+                <br><br>
+
+                <div id="videoResolutionChooser" style="display: none;">
+                    <p class="light" style="margin: 0">Choose Video Resolution</p>
+                    <select id="selectCustom" class="selectForm" onchange="customOrNot();">
+                        <option value="Fixed">Fixed Resolution</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                    <br><br>
+                    <select multiple onchange="checkResolution()" id="selectResolution" class="selectForm">
+                        <option value="K1">Screen K1</option>
+                        <option value="K2">Screen K2</option>
+                        <option value="K3">Screen K3</option>
+                        <option value="K4">Screen K4</option>
+                        <option value="K5">Screen K5</option>
+                        <option value="F1">Screen F1</option>
+                        <option value="F2">Screen F2</option>
+                    </select>
+                    <p style="color: red; margin: 0;" class="light" id="configurationErr">Screen Configuration Is Invalid</p>
+                    <div id="customResolution" style="text-align: center;display: none;">
+                        <input onchange="getCustomResolution();" placeholder="Width" id="width" style="display: inline-block; width: 30%" class="inputFocus" >
+                        <label class="regular">&nbsp;&nbsp;x&nbsp;&nbsp;</label>
+                        <input onchange="getCustomResolution();" placeholder="Height" id="height" style="display: inline-block; width: 30%" class="inputFocus" >
+                    </div>
+                </div>
+                <br><br>
+                <div id="filenameChooser" style="display: none;">
                     <p class="light" style="margin: 0;">File Name:</p>
-                    <input onchange="generateCopyText();" class="inputFocus" id="filename" >
+                    <select onchange="checkFileName()" id="selectFileName" class="selectForm">
+                        <option value="NIL">Choose an option</option>
+                        <option value="Custom">Custom Filename</option>
+                        <optgroup label="Main Performances">
+                            <option value="P0">P0 House is not a home</option>
+                            <option value="P1">P1 Overture</option>
+                            <option value="P2">P2 CB Life in the Lion City</option>
+                            <option value="P3">P3 Each Other</option>
+                            <option value="P4.1">P4.1 Gymnopedie I</option>
+                            <option value="P4.2">P4.2 Gymnopedie II</option>
+                            <option value="P5">P5 Together</option>
+                            <option value="P6">P6 Stay With You (JJ + Stef)</option>
+                            <option value="P7">P7 Queenfisher</option>
+                            <option value="P8">P8 Everything I Am</option>
+                            <option value="P9">P9 Everyday Heroes</option>
+                            <option value="P10">P10	We Will Get There</option>
+                            <option value="P11">P11	Reprise 1</option>
+                            <option value="P12">P12	Reprise 2</option>
+                            <option value="FINALE">P13 Finale</option>
+                        </optgroup>
+                        <optgroup label="Films">
+                            <option value="Film1">Film 1 - What We Treasure</option>
+                            <option value="Film2">Film 2 - Little Inconveniences (Kids) </option>
+                            <option value="Film3">Film 3 - Separation & Isolation</option>
+                            <option value="Film4">Film 4 - Losing Control</option>
+                            <option value="Film5A">Film 5A - Stepping Up (Frontline)</option>
+                            <option value="Film5B">Film 5B - Stepping Up (Essential Services)</option>
+                            <option value="Film6">Film 6 - Reaching Out (Community Volunteers)</option>
+                            <option value="Film7">Film 7 - Coming Together (Gotong Royong)</option>
+                            <option value="Film8">Film 8 - Gratitude to Frontline Workers & Community Heroes</option>
+                            <option value="Film9">Film 9 - Looking Forward (Confidence & Strength)</option>
+                        </optgroup>
+                        <optgroup label="Others">
+                            <option value="ShowFilm">F0 Show Film</option>
+                            <option value="VirtualChoir">F1 Virtual Choir</option>
+                            <option value="IntoTheHomes">F2 Into the Homes</option>
+                            <option value="PledgeNationalAnthem">F3 Pledge / National Anthem</option>
+                            <option value="LightUpMomentCloseUps">F4 Light Up Moment Close-Ups</option>
+                        </optgroup>
+
+                    </select>
+                    <input style="display: none" onchange="generateCopyText();" class="inputFocus" id="filename" >
+                    <br><br>
                     <div style="text-align: center;">
-                        <a class="link" href="javascript:copyTextFunc();"><label style="cursor: pointer" id="copyText" class="light">Start Typing...</label> &nbsp;<i class="fa fa-clipboard" aria-hidden="true"></i></a>
+                        <a class="link" href="javascript:copyTextFunc();"><label style="cursor: pointer" id="copyText" class="light">Choose/Type File name...</label> &nbsp;<i class="fa fa-clipboard" aria-hidden="true"></i></a>
                         <em><p class="light" id="copied">&nbsp;</p></em>
                     </div>
                 </div>
-                <br><br><br><br>
+
+                <br><br>
                 <button onclick="refresh();" class="formButton">New Render</button>
                 <input id="copy" style="display: none;">
             </div>
@@ -83,79 +152,43 @@
     </body>
 
     <script>
-        function checkWhichSelection(){
-
-        	if( $('#selectCompany').val() === 'showCompany' ){
-        		$('#showCompany').fadeIn();
-		        $('#hexagon').hide();
-		        $('#formButton').show();
-            }
-	        else if( $('#selectCompany').val() === 'hexagon' ){
-		        $('#hexagon').fadeIn();
-		        $('#showCompany').hide();
-		        $('#formButton').show();
-	        }
-	        else{
-		        $('#showCompany').hide();
-		        $('#hexagon').hide();
-		        $('#formButton').hide();
-            }
-
+        var resolution = {
+        	K1: {
+        		number:1,
+        		width:500,
+                height:1280,
+            },
+            K2:{
+	            number:2,
+	            width:200,
+	            height:1280,
+            },
+            K3:{
+	            number:3,
+	            width:1000,
+	            height:1280,
+            },
+            K4:{
+	            number:4,
+	            width:200,
+	            height:1280,
+            },
+            K5:{
+	            number:5,
+	            width:500,
+	            height:1280,
+            },
+            F1:{
+	            number:8,
+	            width:1024,
+	            height:1792,
+            },
+            F2:{
+	            number:10,
+	            width:300,
+	            height:1800,
+            },
         }
-        function checkLoadInSelection(){
-	        if( $('#selectLoadIn').val() !== 'NIL' ){
-		        $('#filenameChooser').show();
-	        }
-        }
-        function nextPage(){
-	        let parent1 = document.querySelector(".parent1"),
-		        parent2 = document.querySelector(".parent2");
-        	if($('#selectCompany').val() === 'showCompany'){
-		        if (parent1.children.length == parent1.querySelectorAll(".checked").length) {
-			        $('#page1').hide();
-			        $('#page2').fadeIn();
-		        }
-		        else{
-			        Swal.fire({
-				        icon: 'error',
-				        title: 'Oops...',
-				        text: 'Please make sure you\'ve configured the files properly',
-			        })
-                }
-            }
-	        if($('#selectCompany').val() === 'hexagon'){
-		        if (parent2.children.length == parent2.querySelectorAll(".checked").length) {
-			        $('#page1').hide();
-			        $('#page2').fadeIn();
-		        }
-		        else{
-			        Swal.fire({
-				        icon: 'error',
-				        title: 'Oops...',
-				        text: 'Please make sure you\'ve configured the files properly',
-			        })
-		        }
-	        }
-        }
-        function refresh(){
-	        location.reload();
-        }
-        function generateCopyText(){
-        	$("#copyText").html($('#filename').val().toUpperCase()+'_v'+moment(new Date()).format('YYYYMMDDHHmm')+'.mov')
-        }
-        function copyTextFunc() {
-        	$('#copy').show();
-        	$('#copy').val($('#copyText').html())
-	        var copyText = document.getElementById("copy");
-	        copyText.select();
-	        copyText.setSelectionRange(0, 99999)
-	        document.execCommand("copy");
-	        $('#copied').hide();
-	        $('#copied').fadeIn();
-	        $('#copied').html('Copied!<i class="fa fa-check" aria-hidden="true"></i></p>')
-	        $('#copy').hide();
-        }
-
 	    // Add a "checked" symbol when clicking on a list item
 	    var list1 = document.getElementById('showCompanyCheck');
 	    list1.addEventListener('click', function(ev) {
@@ -171,6 +204,261 @@
 	        }
         }, false);
 
+	    function checkWhichSelection(){
 
+		    if( $('#selectCompany').val() === 'showCompany' ){
+			    $('#showCompany').fadeIn();
+			    $('#hexagon').hide();
+			    $('#formButton').show();
+		    }
+		    else if( $('#selectCompany').val() === 'hexagon' ){
+			    $('#hexagon').fadeIn();
+			    $('#showCompany').hide();
+			    $('#formButton').show();
+		    }
+		    else{
+			    $('#showCompany').hide();
+			    $('#hexagon').hide();
+			    $('#formButton').hide();
+		    }
+
+	    }
+	    function checkLoadInSelection(){
+		    if( $('#selectLoadIn').val() !== 'NIL' ){
+			    $('#videoResolutionChooser').show();
+		    }
+		    if($("#selectFileName").val()!=="NIL"){
+			    checkFileName()
+            }
+	    }
+	    function customOrNot() {
+		    if($("#selectCustom").val()==="Fixed"){
+			    $("#selectResolution").show()
+			    $("#customResolution").hide();
+		    }
+		    else if($("#selectCustom").val()==="Custom"){
+			    $("#selectResolution").hide()
+			    $("#customResolution").show();
+			    $("#configurationErr").hide()
+                if($("#width").val().length !==0 && $("#height").val().length !==0){
+                	$("#filenameChooser").show();
+                }
+		        else{
+	                $("#filenameChooser").hide();
+                }
+		    }
+	    }
+        function checkResolution(){
+            console.log($("#selectResolution").val())
+            var resolutionArray = []
+            var linearSequence = []
+            for(var i=0; i<$("#selectResolution").val().length; i++){
+	            resolutionArray.push(resolution[$("#selectResolution").val()[i]])
+	            linearSequence.push(resolution[$("#selectResolution").val()[i]].number)
+            }
+            console.log(resolutionArray)
+            console.log(linearSequence)
+            console.log(checkLinear(linearSequence))
+            if(checkValidityOfConfiguration(linearSequence, resolutionArray)){
+	            $("#configurationErr").hide()
+	            $("#filenameChooser").show()
+            }
+            else{
+	            $("#configurationErr").show()
+                $("#filenameChooser").hide()
+            }
+            if($("#selectFileName").val()!=="NIL"){
+	            checkFileName()
+            }
+        }
+        function getSequenceArray(){
+	        console.log($("#selectResolution").val())
+	        var resolutionArray = []
+	        var linearSequence = []
+	        for(var i=0; i<$("#selectResolution").val().length; i++){
+		        resolutionArray.push(resolution[$("#selectResolution").val()[i]])
+		        linearSequence.push(resolution[$("#selectResolution").val()[i]].number)
+	        }
+	        return ([resolutionArray,linearSequence])
+        }
+	    function checkFileName(){
+            if($("#selectFileName").val()==="Custom"){
+            	$("#filename").show()
+	            resetCopyText();
+            }
+            else{
+	            resetCopyText();
+	            $("#filename").hide()
+                if($("#selectFileName").val()!=="NIL"){
+	                $("#copyText").html(
+		                $('#selectFileName').val()+"_"+
+		                getResolution()[0]+"x"+
+		                getResolution()[1]+
+		                '_v'+
+		                getNearestTimeStamp()+
+                        '.mov'
+                    )
+                }
+
+            }
+	    }
+	    function getNearestTimeStamp(){
+	    	var YYYYMMDD = moment(new Date()).format("YYYYMMDD");
+
+	    	if(parseInt(moment(new Date()).format('HHmm')) > closestLoadIn($("#selectLoadIn").val()) ){
+			    var new_date = moment(new Date()).add(1, 'days');
+			    YYYYMMDD = moment(new_date).format("YYYYMMDD")
+		    }
+	    	return(YYYYMMDD + closestLoadIn($("#selectLoadIn").val()).toString())
+        }
+        function closestLoadIn(data){
+	    	var LoadIns = [1000, 1200, 1500, 1700, 1900]
+            var closestIndex = 0;
+	    	if(data==="Auto"){
+	    		var currentTime = parseInt(moment(new Date()).format("HHmm"))
+			    for(var i =0; i<LoadIns.length; i++){
+			    	if(currentTime>LoadIns[i]){
+					    closestIndex = i
+                    }
+                }
+	    	    return LoadIns[closestIndex]
+            }
+	    	else{
+	    		return parseInt(data)
+            }
+        }
+        function getResolution(){
+	    	var width = parseInt($("#width").val());
+	    	var height= parseInt($("#height").val());
+	    	if($("#selectCustom").val()==="Fixed"){
+			    width = 0
+                height = getSequenceArray()[0][0].height
+			   if(checkLinear(getSequenceArray()[1])){
+				   for(var i =0; i<getSequenceArray()[0].length; i++){
+					   width = width + getSequenceArray()[0][i].width
+                   }
+				   return [width, height]
+               }
+			   else{
+				   for(var i =0; i<getSequenceArray()[0].length/2; i++){
+					   width = width + getSequenceArray()[0][i].width
+				   }
+				   return [width, height]
+               }
+            }
+	    	return [width, height]
+        }
+        function getCustomResolution(){
+	    	if($("#width").val().length !== 0 && $("#height").val().length !== 0){
+	    		$("#filenameChooser").show()
+			    checkFileName();
+            }
+        }
+
+	    function checkValidityOfConfiguration(array, JsonArray){
+	    	if(array.length!==0){
+			    if(!checkLinear(array)){
+				    if(array.length%2===0 && !array.includes(8) && !array.includes(10)){
+				    	var validOrNot = true;
+				    	for(var i =0; i<array.length/2; i++){
+				    		if(JsonArray[i].width !== JsonArray[array.length-1-i].width){
+							    validOrNot = false;
+                            }
+                        }
+					    return validOrNot;
+				    }
+				    else{
+					    return false;
+				    }
+			    }
+			    else{
+				    return true
+			    }
+            }
+	    	else{
+	    		return false
+            }
+        }
+        function checkLinear(array){
+	    	var commonDiff = 1;
+	    	var newCommonDiff =0;
+	    	if(array.length >=2){
+			    for(var i=0; i<array.length-1; i++){
+				    newCommonDiff = array[i+1]-array[i]
+                    if(commonDiff!==newCommonDiff){
+                    	return false
+                    }
+			    }
+			    return true
+            }
+	    	else{
+	    		if(array.length >= 0){
+				    return true
+                }
+	    		else{
+	    			return false
+                }
+            }
+
+        }
+	    function nextPage(){
+		    let parent1 = document.querySelector(".parent1"),
+			    parent2 = document.querySelector(".parent2");
+		    if($('#selectCompany').val() === 'showCompany'){
+			    if (parent1.children.length == parent1.querySelectorAll(".checked").length) {
+				    $('#page1').hide();
+				    $('#page2').fadeIn();
+			    }
+			    else{
+				    Swal.fire({
+					    icon: 'error',
+					    title: 'Oops...',
+					    text: 'Please make sure you\'ve configured the files properly',
+				    })
+			    }
+		    }
+		    if($('#selectCompany').val() === 'hexagon'){
+			    if (parent2.children.length == parent2.querySelectorAll(".checked").length) {
+				    $('#page1').hide();
+				    $('#page2').fadeIn();
+			    }
+			    else{
+				    Swal.fire({
+					    icon: 'error',
+					    title: 'Oops...',
+					    text: 'Please make sure you\'ve configured the files properly',
+				    })
+			    }
+		    }
+	    }
+	    function refresh(){
+		    location.reload();
+	    }
+	    function generateCopyText(){
+		    $("#copyText").html(
+			    $('#filename').val().toUpperCase()+"_"+
+			    getResolution()[0]+"x"+
+			    getResolution()[1]+
+			    '_v'+
+			    getNearestTimeStamp()+
+			    '.mov'
+		    )
+	    }
+	    function resetCopyText(){
+		    $("#copyText").html("Choose/Type File name...")
+
+	    }
+	    function copyTextFunc(){
+		    $('#copy').show();
+		    $('#copy').val($('#copyText').html())
+		    var copyText = document.getElementById("copy");
+		    copyText.select();
+		    copyText.setSelectionRange(0, 99999)
+		    document.execCommand("copy");
+		    $('#copied').hide();
+		    $('#copied').fadeIn();
+		    $('#copied').html('Copied!<i class="fa fa-check" aria-hidden="true"></i></p>')
+		    $('#copy').hide();
+	    }
     </script>
 </html>

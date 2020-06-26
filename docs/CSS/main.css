@@ -5,9 +5,10 @@
     flex: 1;
     font-family: 'Roboto', sans-serif;
     background-color: #2F2FA2;
+    overflow: auto;
 }
 .mainPageContainer{
-    margin-top: 100px;
+    margin-top: 0px;
     width: 60%;
     background-color: rgb(222,222,222);
     border-radius: 50px;
