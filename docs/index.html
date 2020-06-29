@@ -155,27 +155,27 @@
         var resolution = {
         	K1: {
         		number:1,
-        		width:500,
+        		width:1024,
                 height:1280,
             },
             K2:{
 	            number:2,
-	            width:200,
+	            width:768,
 	            height:1280,
             },
             K3:{
 	            number:3,
-	            width:1000,
+	            width:1792,
 	            height:1280,
             },
             K4:{
 	            number:4,
-	            width:200,
+	            width:768,
 	            height:1280,
             },
             K5:{
 	            number:5,
-	            width:500,
+	            width:1024,
 	            height:1280,
             },
             F1:{
@@ -185,8 +185,8 @@
             },
             F2:{
 	            number:10,
-	            width:300,
-	            height:1800,
+	            width:1280,
+	            height:768,
             },
         }
 	    // Add a "checked" symbol when clicking on a list item
@@ -337,12 +337,14 @@
 				   for(var i =0; i<getSequenceArray()[0].length; i++){
 					   width = width + getSequenceArray()[0][i].width
                    }
+				   width = width + 20*(getSequenceArray()[0].length-1)
 				   return [width, height]
                }
 			   else{
 				   for(var i =0; i<getSequenceArray()[0].length/2; i++){
 					   width = width + getSequenceArray()[0][i].width
 				   }
+				   width = width + 20*((getSequenceArray()[0].length/2)-1)
 				   return [width, height]
                }
             }
