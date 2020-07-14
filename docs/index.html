@@ -14,7 +14,7 @@
 
     <body class="screen">
         <div class="mainPageContainer">
-            <h1 style="color: #553D67" align="center">CONTENT COMMITTEE CHECKLIST <i class="fa fa-check-square-o" aria-hidden="true"></i></h1>
+            <h1 style="color: #379683" align="center">CONTENT COMMITTEE CHECKLIST <i class="fa fa-check-square-o" aria-hidden="true"></i></h1>
             <p class="bold">Congratulations, on finishing your edit!</p>
             <p class="regular">Now it's time to render, before your do please make sure you've done the following:</p>
             <br>
@@ -61,6 +61,7 @@
                 <select onchange="checkLoadInSelection()" id="selectLoadIn" class="selectForm">
                      <option value="NIL">Choose an option</option>
                      <option value="Auto">Automatically Choose The Nearest Load-In Time</option>
+                    <option value="ProductionHouse">PRODUCTION HOUSE OPTION</option>
                      <option value="1000">1000</option>
                      <option value="1200">1200</option>
                      <option value="1500">1500</option>
@@ -72,18 +73,37 @@
                 <div id="videoResolutionChooser" style="display: none;">
                     <p class="light" style="margin: 0">Choose Video Resolution</p>
                     <select id="selectCustom" class="selectForm" onchange="customOrNot();">
-                        <option value="Fixed">Fixed Resolution</option>
+                        <optgroup label="LED">
+                            <option value="Fixed">Fixed Resolution (Height x1280)</option>
+                            <option value="Full">Full Resolution (Height x2560)</option>
+                        </optgroup>
+                        <optgroup label="MEDIA CORP">
+                            <option value="MediaCorp">Media Corp (16:9)</option>
+                        </optgroup>
+                        <optgroup label="PROJECTION">
+                            <option value="Projection">Projection</option>
+                        </optgroup>
                         <option value="Custom">Custom</option>
                     </select>
                     <br><br>
                     <select multiple onchange="checkResolution()" id="selectResolution" class="selectForm">
-                        <option value="K1">Screen K1</option>
-                        <option value="K2">Screen K2</option>
-                        <option value="K3">Screen K3</option>
-                        <option value="K4">Screen K4</option>
-                        <option value="K5">Screen K5</option>
-                        <option value="F1">Screen F1</option>
-                        <option value="F2">Screen F2</option>
+                        <optgroup label="LED SCREENS">
+                            <option value="K1">Screen K1</option>
+                            <option value="K2">Screen K2</option>
+                            <option value="K3">Screen K3</option>
+                            <option value="K4">Screen K4</option>
+                            <option value="K5">Screen K5</option>
+                            <option value="F1">Screen F1</option>
+                            <option value="F2">Screen F2</option>
+                        </optgroup>
+                    </select>
+                    <select multiple onchange="checkResolution()" id="selectResolutionProj" class="selectForm">
+                        <optgroup label="PROJECTION">
+                            <option value="PROJL">PROJECTION LEFT</option>
+                            <option value="PROJR">PROJECTION RIGHT</option>
+                            <option value="PROJC">PROJECTION CENTER</option>
+                            <option value="KABUKI">KABUKI</option>
+                        </optgroup>
                     </select>
                     <p style="color: red; margin: 0;" class="light" id="configurationErr">Screen Configuration Is Invalid</p>
                     <div id="customResolution" style="text-align: center;display: none;">
@@ -94,11 +114,31 @@
                 </div>
                 <br><br>
                 <div id="filenameChooser" style="display: none;">
+                    <p class="light" style="margin: 0;">(OPTIONAL) File Extension:</p>
+                    <select onchange="checkFileName()" id="selectExtension" class="selectForm">
+                        <option value="">Optional Additional File Extensions</option>
+                        <optgroup label="UN-ENCODED">
+                            <option value="_unencoded">PRODUCTION HOUSE</option>
+                            <option value="_SUB_unencoded">SUBTITLES</option>
+                            <option value="_LTLEFT_unencoded">LOWER THIRDS LEFT</option>
+                            <option value="_LTRIGHT_unencoded">LOWER THIRDS RIGHT</option>
+                            <option value="_LT_unencoded">LOWER THIRDS</option>
+                            <option value="_FILMTITLE_unencoded">FILM TITLES</option>
+                        </optgroup>
+                        <optgroup label="ENCODED">
+                            <option value="">PRODUCTION HOUSE</option>
+                            <option value="_SUBHAP">SUBTITLES</option>
+                            <option value="_LTLEFTHAP">LOWER THIRDS LEFT</option>
+                            <option value="_LTRIGHTHAP">LOWER THIRDS RIGHT</option>
+                            <option value="_LTHAP">LOWER THIRDS</option>
+                            <option value="_FILMTITLE">FILM TITLES</option>
+                        </optgroup>
+                    </select>
                     <p class="light" style="margin: 0;">File Name:</p>
                     <select onchange="checkFileName()" id="selectFileName" class="selectForm">
                         <option value="NIL">Choose an option</option>
                         <option value="Custom">Custom Filename</option>
-                        <optgroup label="Main Performances">
+                        <optgroup label="Performances">
                             <option value="P0">P0 House is not a home</option>
                             <option value="P1">P1 Overture</option>
                             <option value="P2">P2 CB Life in the Lion City</option>
@@ -111,30 +151,23 @@
                             <option value="P8">P8 Everything I Am</option>
                             <option value="P9">P9 Everyday Heroes</option>
                             <option value="P10">P10	We Will Get There</option>
-                            <option value="P11">P11	Reprise 1</option>
-                            <option value="P12">P12	Reprise 2</option>
-                            <option value="FINALE">P13 Finale</option>
+                            <option value="P11.1">P11.1 Reprise 1</option>
+                            <option value="P11.2">P11.2 Reprise 1</option>
+                            <option value="P11.3">P11.3 Virtual Choir</option>
+                            <option value="P12.1">P12.1 Finale Pledge</option>
+                            <option value="P12.2">P12.2 Finale Anthem</option>
+                            <option value="P13">P13 Fireworks and Lightup</option>
                         </optgroup>
-                        <optgroup label="Films">
-                            <option value="Film1">Film 1 - What We Treasure</option>
-                            <option value="Film2">Film 2 - Little Inconveniences (Kids) </option>
-                            <option value="Film3">Film 3 - Separation & Isolation</option>
-                            <option value="Film4">Film 4 - Losing Control</option>
-                            <option value="Film5A">Film 5A - Stepping Up (Frontline)</option>
-                            <option value="Film5B">Film 5B - Stepping Up (Essential Services)</option>
-                            <option value="Film6">Film 6 - Reaching Out (Community Volunteers)</option>
-                            <option value="Film7">Film 7 - Coming Together (Gotong Royong)</option>
-                            <option value="Film8">Film 8 - Gratitude to Frontline Workers & Community Heroes</option>
-                            <option value="Film9">Film 9 - Looking Forward (Confidence & Strength)</option>
+                        <optgroup label="Show Films">
+                            <option value="Film2">Film 2</option>
+                            <option value="Film4">Film 4</option>
+                            <option value="Film5A">Film 5A</option>
+                            <option value="Film5B">Film 5B</option>
+                            <option value="Film6">Film 6</option>
+                            <option value="Film7">Film 7</option>
+                            <option value="Film8">Film 8</option>
+                            <option value="Film9">Film 9</option>
                         </optgroup>
-                        <optgroup label="Others">
-                            <option value="ShowFilm">F0 Show Film</option>
-                            <option value="VirtualChoir">F1 Virtual Choir</option>
-                            <option value="IntoTheHomes">F2 Into the Homes</option>
-                            <option value="PledgeNationalAnthem">F3 Pledge / National Anthem</option>
-                            <option value="LightUpMomentCloseUps">F4 Light Up Moment Close-Ups</option>
-                        </optgroup>
-
                     </select>
                     <input style="display: none" onchange="generateCopyText();" class="inputFocus" id="filename" >
                     <br><br>
@@ -188,6 +221,26 @@
 	            width:1280,
 	            height:768,
             },
+	        PROJL:{
+		        number:12,
+		        width:972,
+		        height:1888,
+	        },
+	        PROJR:{
+		        number:14,
+		        width:972,
+		        height:1888,
+	        },
+	        PROJC:{
+		        number:16,
+		        width:3840,
+		        height:1068,
+	        },
+            KABUKI:{
+	            number:18,
+	            width:2664,
+	            height:1440,
+            }
         }
 	    // Add a "checked" symbol when clicking on a list item
 	    var list1 = document.getElementById('showCompanyCheck');
@@ -226,20 +279,23 @@
 	    function checkLoadInSelection(){
 		    if( $('#selectLoadIn').val() !== 'NIL' ){
 			    $('#videoResolutionChooser').show();
+			    $("#selectResolutionProj").hide();
 		    }
 		    if($("#selectFileName").val()!=="NIL"){
 			    checkFileName()
             }
 	    }
 	    function customOrNot() {
-		    if($("#selectCustom").val()==="Fixed"){
+		    if($("#selectCustom").val()==="Fixed" || $("#selectCustom").val()==="Full"){
 			    $("#selectResolution").show()
 			    $("#customResolution").hide();
+			    $("#selectResolutionProj").hide();
 		    }
 		    else if($("#selectCustom").val()==="Custom"){
 			    $("#selectResolution").hide()
 			    $("#customResolution").show();
 			    $("#configurationErr").hide()
+			    $("#selectResolutionProj").hide();
                 if($("#width").val().length !==0 && $("#height").val().length !==0){
                 	$("#filenameChooser").show();
                 }
@@ -247,25 +303,43 @@
 	                $("#filenameChooser").hide();
                 }
 		    }
+		    else if($("#selectCustom").val()==="Projection"){
+			    $("#selectResolution").hide()
+			    $("#customResolution").hide();
+			    $("#selectResolutionProj").show();
+            }
+		    else if($("#selectCustom").val()==="MediaCorp"){
+			    $("#selectResolution").hide()
+			    $("#customResolution").hide();
+			    $("#selectResolutionProj").hide();
+            }
+		    checkFileName();
 	    }
         function checkResolution(){
-            console.log($("#selectResolution").val())
-            var resolutionArray = []
-            var linearSequence = []
-            for(var i=0; i<$("#selectResolution").val().length; i++){
-	            resolutionArray.push(resolution[$("#selectResolution").val()[i]])
-	            linearSequence.push(resolution[$("#selectResolution").val()[i]].number)
+	    	if($("#selectCustom").val()==="Fixed" || $("#selectCustom").val()==="Full"){
+			    console.log($("#selectResolution").val())
+			    var resolutionArray = []
+			    var linearSequence = []
+			    for(var i=0; i<$("#selectResolution").val().length; i++){
+				    resolutionArray.push(resolution[$("#selectResolution").val()[i]])
+				    linearSequence.push(resolution[$("#selectResolution").val()[i]].number)
+			    }
+			    console.log(resolutionArray)
+			    console.log(linearSequence)
+			    console.log(checkLinear(linearSequence))
+			    if(checkValidityOfConfiguration(linearSequence, resolutionArray)){
+				    $("#configurationErr").hide()
+				    $("#filenameChooser").show()
+			    }
+			    else{
+				    $("#configurationErr").show()
+				    $("#filenameChooser").hide()
+			    }
             }
-            console.log(resolutionArray)
-            console.log(linearSequence)
-            console.log(checkLinear(linearSequence))
-            if(checkValidityOfConfiguration(linearSequence, resolutionArray)){
-	            $("#configurationErr").hide()
-	            $("#filenameChooser").show()
-            }
-            else{
-	            $("#configurationErr").show()
-                $("#filenameChooser").hide()
+            else if($("#selectCustom").val()==="Projection"){
+			    $("#filenameChooser").show()
+			    $("#configurationErr").hide()
+                getResolution()
             }
             if($("#selectFileName").val()!=="NIL"){
 	            checkFileName()
@@ -289,15 +363,26 @@
             else{
 	            resetCopyText();
 	            $("#filename").hide()
-                if($("#selectFileName").val()!=="NIL"){
+                if($("#selectFileName").val()!=="NIL" && $("#selectCustom").val()!=="Projection"){
 	                $("#copyText").html(
 		                $('#selectFileName').val()+"_"+
 		                getResolution()[0]+"x"+
 		                getResolution()[1]+
 		                '_v'+
 		                getNearestTimeStamp()+
-                        '.mov'
+		                $("#selectExtension").val()
                     )
+                }
+                else if($("#selectFileName").val()!=="NIL" && $("#selectCustom").val()==="Projection"){
+	                $("#copyText").html(
+		                $('#selectFileName').val()+"_"+
+                        $('#selectResolutionProj').val()+"_"+
+		                getResolution()[0]+"x"+
+		                getResolution()[1]+
+		                '_v'+
+		                getNearestTimeStamp()+
+		                $("#selectExtension").val()
+	                )
                 }
 
             }
@@ -316,12 +401,15 @@
             var closestIndex = 0;
 	    	if(data==="Auto"){
 	    		var currentTime = parseInt(moment(new Date()).format("HHmm"))
-			    for(var i =0; i<LoadIns.length; i++){
-			    	if(currentTime>LoadIns[i]){
+			    for(var i =LoadIns.length-1; i>0; i--){
+			    	if(currentTime < LoadIns[i]){
 					    closestIndex = i
                     }
                 }
 	    	    return LoadIns[closestIndex]
+            }
+	    	else if(data ==="ProductionHouse"){
+	    		return(parseInt(moment(new Date()).format("HHmm")))
             }
 	    	else{
 	    		return parseInt(data)
@@ -330,7 +418,7 @@
         function getResolution(){
 	    	var width = parseInt($("#width").val());
 	    	var height= parseInt($("#height").val());
-	    	if($("#selectCustom").val()==="Fixed"){
+	    	if($("#selectCustom").val()==="Fixed" || $("#selectCustom").val()==="Full"){
 			    width = 0
                 height = getSequenceArray()[0][0].height
 			   if(checkLinear(getSequenceArray()[1])){
@@ -338,6 +426,9 @@
 					   width = width + getSequenceArray()[0][i].width
                    }
 				   width = width + 20*(getSequenceArray()[0].length-1)
+                   if($("#selectCustom").val()==="Full"){
+                   	height = height*2;
+                   }
 				   return [width, height]
                }
 			   else{
@@ -347,6 +438,16 @@
 				   width = width + 20*((getSequenceArray()[0].length/2)-1)
 				   return [width, height]
                }
+            }
+	    	if($("#selectCustom").val()==="MediaCorp"){
+	    		width = 1920
+                height = 1080
+			    return [width, height]
+            }
+	    	if($("#selectCustom").val()=="Projection"){
+	    		width = resolution[$("#selectResolutionProj").val()].width
+                height = resolution[$("#selectResolutionProj").val()].height
+			    return [width, height]
             }
 	    	return [width, height]
         }
@@ -360,7 +461,7 @@
 	    function checkValidityOfConfiguration(array, JsonArray){
 	    	if(array.length!==0){
 			    if(!checkLinear(array)){
-				    if(array.length%2===0 && !array.includes(8) && !array.includes(10)){
+				    if(array.length%2===0 && !array.includes(8) && !array.includes(10) && !array.includes(12) && !array.includes(14) && !array.includes(16) && !array.includes(18)){
 				    	var validOrNot = true;
 				    	for(var i =0; i<array.length/2; i++){
 				    		if(JsonArray[i].width !== JsonArray[array.length-1-i].width){
@@ -442,8 +543,7 @@
 			    getResolution()[0]+"x"+
 			    getResolution()[1]+
 			    '_v'+
-			    getNearestTimeStamp()+
-			    '.mov'
+			    getNearestTimeStamp()
 		    )
 	    }
 	    function resetCopyText(){
